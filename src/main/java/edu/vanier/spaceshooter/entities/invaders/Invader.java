@@ -5,7 +5,6 @@ import edu.vanier.spaceshooter.models.Sprite;
 import javafx.scene.paint.Color;
 
 public class Invader extends Sprite {
-    private double health = 100;
     private Level level;
     private double speed;
     private String pattern;

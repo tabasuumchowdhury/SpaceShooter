@@ -43,4 +43,12 @@ public class Sprite extends Rectangle {
     public void setDead(boolean dead) {
         this.dead = dead;
     }
+    public double getHealth() {
+        return health;
+    }
+    public void setHealth(double damage) {
+        health -= damage;
+        if (health == 0)
+            setDead(true);
+    }
 }

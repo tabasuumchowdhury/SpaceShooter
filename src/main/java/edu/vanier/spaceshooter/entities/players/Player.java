@@ -14,4 +14,5 @@ public class Player extends Sprite {
 
         this.level = level;
     }
+
 }
