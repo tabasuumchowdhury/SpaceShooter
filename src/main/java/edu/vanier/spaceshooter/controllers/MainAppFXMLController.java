@@ -1,5 +1,9 @@
 package edu.vanier.spaceshooter.controllers;
 
+import edu.vanier.spaceshooter.entities.Projectile;
+import edu.vanier.spaceshooter.entities.invaders.Invader;
+import edu.vanier.spaceshooter.entities.players.Player;
+import edu.vanier.spaceshooter.models.Level;
 import edu.vanier.spaceshooter.models.Sprite;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,19 +21,18 @@ import org.slf4j.LoggerFactory;
  * FXML Controller class of the MainApp UI.
  */
 public class MainAppFXMLController {
-
     private final static Logger logger = LoggerFactory.getLogger(MainAppFXMLController.class);
     @FXML
     private Pane animationPanel;
     private double elapsedTime = 0;
-    private Sprite spaceShip;
+    private Player spaceShip;
     private Scene mainScene;
     AnimationTimer gameLoop;
 
     @FXML
     public void initialize() {
         logger.info("Initializing MainAppController...");
-        spaceShip = new Sprite(300, 750, 40, 40, "player", Color.BLUE);
+        spaceShip = new Player(300, 750, 40, 40, Color.BLUE, Level.LEVEL1);
         animationPanel.setPrefSize(600, 800);
         animationPanel.getChildren().add(spaceShip);
     }
@@ -68,20 +71,21 @@ public class MainAppFXMLController {
         mainScene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
                 case KeyCode.A ->
-                    spaceShip.moveLeft();
+                        spaceShip.moveLeft();
                 case KeyCode.D ->
-                    spaceShip.moveRight();
+                        spaceShip.moveRight();
                 case KeyCode.SPACE ->
-                    shoot(spaceShip);
+                        shoot(spaceShip);
+
             }
         });
     }
 
     private void generateInvaders() {
         for (int i = 0; i < 5; i++) {
-            Sprite invader = new Sprite(
-                    90 + i * 100,
-                    150, 30, 30, "enemy",
+            Invader invader = new Invader(
+                    Level.LEVEL1, 90 + i * 100,
+                    150, 1, "sideways" ,30, 30,
                     Color.RED);
             animationPanel.getChildren().add(invader);
         }
@@ -198,7 +202,7 @@ public class MainAppFXMLController {
      * either an enemy or the spaceship.
      */
     private void shoot(Sprite firingEntity) {
-        // The firing entity can be either an enemy or the sapceship.
+        // The firing entity can be either an enemy or the spaceship.
         Sprite bullet = new Sprite(
                 (int) firingEntity.getTranslateX() + 20,
                 (int) firingEntity.getTranslateY(),

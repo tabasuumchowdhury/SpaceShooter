@@ -4,7 +4,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Sprite extends Rectangle {
-
+    private double health = 100;
     private boolean dead = false;
     private final String type;
 
