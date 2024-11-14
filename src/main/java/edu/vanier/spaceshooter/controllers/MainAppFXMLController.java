@@ -1,10 +1,9 @@
 package edu.vanier.spaceshooter.controllers;
 
-import edu.vanier.spaceshooter.entities.Projectile;
 import edu.vanier.spaceshooter.entities.invaders.Invader;
 import edu.vanier.spaceshooter.entities.players.Player;
-import edu.vanier.spaceshooter.models.Level;
-import edu.vanier.spaceshooter.models.Sprite;
+import edu.vanier.spaceshooter.helpers.Level;
+import edu.vanier.spaceshooter.entities.Sprite;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.animation.AnimationTimer;
@@ -85,8 +84,7 @@ public class MainAppFXMLController {
         for (int i = 0; i < 5; i++) {
             Invader invader = new Invader(
                     Level.LEVEL1, 90 + i * 100,
-                    150, 1, "sideways" ,30, 30,
-                    Color.RED);
+                    150, 1, "sideways");
             animationPanel.getChildren().add(invader);
         }
     }
@@ -206,8 +204,7 @@ public class MainAppFXMLController {
         Sprite bullet = new Sprite(
                 (int) firingEntity.getTranslateX() + 20,
                 (int) firingEntity.getTranslateY(),
-                5, 20,
-                firingEntity.getType() + "bullet", Color.BLACK);
+                firingEntity.getType() + "bullet");
         animationPanel.getChildren().add(bullet);
     }
 

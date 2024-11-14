@@ -1,7 +1,7 @@
 package edu.vanier.spaceshooter.entities.players;
 
-import edu.vanier.spaceshooter.models.Level;
-import edu.vanier.spaceshooter.models.Sprite;
+import edu.vanier.spaceshooter.helpers.Level;
+import edu.vanier.spaceshooter.entities.Sprite;
 import javafx.scene.paint.Color;
 
 public class Player extends Sprite {
@@ -10,7 +10,7 @@ public class Player extends Sprite {
     private double lives = 3;
     private double score = 0;
     public Player(int x, int y, int width, int height, Color color, Level level) {
-        super(x, y, width, height, "player", color);
+        super(x, y, "player");
 
         this.level = level;
     }
