@@ -16,3 +16,12 @@ It uses `JavaFX 22.0.2`, and includes the [Gradle Wrapper](https://docs.gradle.o
 ## NetBeans
 
 This project template was tested with `NetBeans 17` and `JDK 18`.
+
+## Sources 
+### Provided by teacher
+Teacher's website: https://frostybee.github.io/fx-course/
+
+Kenney: https://kenney.nl/assets
+
+Teacher's javafx-apps: https://github.com/frostybee/javafx-apps.git
+
