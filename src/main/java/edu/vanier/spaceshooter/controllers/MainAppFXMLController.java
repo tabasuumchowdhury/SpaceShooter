@@ -31,9 +31,10 @@ public class MainAppFXMLController {
     @FXML
     public void initialize() {
         logger.info("Initializing MainAppController...");
+
         spaceShip = new Player(300, 750, 40, 40, Color.BLUE, Level.LEVEL1);
         animationPanel.setPrefSize(600, 800);
-        animationPanel.getChildren().add(spaceShip);
+//        animationPanel.getChildren().add(spaceShip);
     }
 
     public void setupGameWorld() {
@@ -80,12 +81,19 @@ public class MainAppFXMLController {
         });
     }
 
+    List<Sprite> invaderList = new ArrayList<>();
+
     private void generateInvaders() {
         for (int i = 0; i < 5; i++) {
             Invader invader = new Invader(
                     Level.LEVEL1, 90 + i * 100,
                     150, 1, "sideways");
-            animationPanel.getChildren().add(invader);
+            invader.setImage(getClass().getResource("/images/ufoBlue.png").toExternalForm());
+            double px = 350 * Math.random() + 50;
+            double py = 350 * Math.random() + 50;
+            invader.setPosition(px, py);
+            invaderList.add(invader);
+//            animationPanel.getChildren().add(invader);
         }
     }
 
@@ -98,16 +106,16 @@ public class MainAppFXMLController {
      *
      * @return A list of {@link Sprite} objects found in the animation panel.
      */
-    private List<Sprite> getSprites() {
-        List<Sprite> spriteList = new ArrayList<>();
-        for (Node n : animationPanel.getChildren()) {
-            if (n instanceof Sprite sprite) {
-                // We should add to the list any node that is a Sprite object.
-                spriteList.add(sprite);
-            }
-        }
-        return spriteList;
-    }
+//    private List<Sprite> getSprites() {
+//        List<Sprite> spriteList = new ArrayList<>();
+//        for (Node n : animationPanel.getChildren()) {
+//            if (n instanceof Sprite sprite) {
+//                // We should add to the list any node that is a Sprite object.
+//                spriteList.add(sprite);
+//            }
+//        }
+//        return spriteList;
+//    }
 
     /**
      * Updates the game state for each frame.
@@ -122,8 +130,8 @@ public class MainAppFXMLController {
     private void update() {
         elapsedTime += 0.016;
         // Actions to be performed during each frame of the animation.
-        getSprites().forEach(this::processSprite);
-        removeDeadSprites();
+        //getSprites().forEach(this::processSprite);
+//        removeDeadSprites();
 
         // Reset the elapsed time.
         if (elapsedTime > 2) {
@@ -145,23 +153,23 @@ public class MainAppFXMLController {
     private void handleEnemyBullet(Sprite sprite) {
         sprite.moveDown();
         // Check for collision with the spaceship
-        if (sprite.getBoundsInParent().intersects(spaceShip.getBoundsInParent())) {
-            spaceShip.setDead(true);
-            sprite.setDead(true);
-        }
+//        if (sprite.getBoundsInParent().intersects(spaceShip.getBoundsInParent())) {
+//            spaceShip.setDead(true);
+//            sprite.setDead(true);
+//        }
     }
 
     private void handlePlayerBullet(Sprite sprite) {
         sprite.moveUp();
-        for (Sprite enemy : getSprites()) {
-            if (enemy.getType().equals("enemy")) {
-                // Check for collision with an enemy
-                if (sprite.getBoundsInParent().intersects(enemy.getBoundsInParent())) {
-                    enemy.setDead(true);
-                    sprite.setDead(true);
-                }
-            }
-        }
+//        for (Sprite enemy : getSprites()) {
+//            if (enemy.getType().equals("enemy")) {
+//                // Check for collision with an enemy
+//                if (sprite.getBoundsInParent().intersects(enemy.getBoundsInParent())) {
+//                    enemy.setDead(true);
+//                    sprite.setDead(true);
+//                }
+//            }
+//        }
     }
 
     private void handleEnemyFiring(Sprite sprite) {
@@ -180,12 +188,12 @@ public class MainAppFXMLController {
      * expression to filter out the dead sprites efficiently.
      * </p>
      */
-    private void removeDeadSprites() {
-        animationPanel.getChildren().removeIf(n -> {
-            Sprite sprite = (Sprite) n;
-            return sprite.isDead();
-        });
-    }
+//    private void removeDeadSprites() {
+//        animationPanel.getChildren().removeIf(n -> {
+//            Sprite sprite = (Sprite) n;
+//            return sprite.isDead();
+//        });
+//    }
 
     /**
      * Creates and adds a bullet sprite fired by the specified entity.
@@ -202,10 +210,10 @@ public class MainAppFXMLController {
     private void shoot(Sprite firingEntity) {
         // The firing entity can be either an enemy or the spaceship.
         Sprite bullet = new Sprite(
-                (int) firingEntity.getTranslateX() + 20,
-                (int) firingEntity.getTranslateY(),
+                (int) firingEntity.getPositionX() + 20,
+                (int) firingEntity.getPositionY(),
                 firingEntity.getType() + "bullet");
-        animationPanel.getChildren().add(bullet);
+//        animationPanel.getChildren().add(bullet);
     }
 
     public void setScene(Scene scene) {
